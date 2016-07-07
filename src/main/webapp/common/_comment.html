@@ -1,0 +1,62 @@
+<div class="comment">
+	<div class="comment_body">
+		<div class="com_title">评论</div>
+		<div class="com_body">
+			@ for (c in comments) {
+			<div class="com_ship">
+				<div class="com_ship_top">
+					<div class="user_info clearfix">
+						<div class="user_img">
+							<a href="javascript:void(0);"><img src="/static/res/images/head.png" /></a>
+						</div>
+						<div class="user_name">
+							<a href="javascript:void(0);">${c.user_name}</a> <span>${c.update_time, 'yyyy-MM-dd HH:mm:ss'}</span>
+						</div>
+						<div class="reply_box">
+							<a class="reply" href="#">回复</a>
+						</div>
+					</div>
+				</div>
+				<div class="com_ship_info">
+					<p>${c.content}</p>
+				</div>
+			</div>
+			@ } elsefor {
+				<div class="com_ship">暂无评论。</div>
+			@ }
+		</div>
+		<div class="com_input">
+		<form action="/comment/comment" method="post" id="cmtForm">
+			<input type="hidden" name="module" value="${module}"/>
+			<input type="hidden" name="recordId" value="${recordId}"/>
+			<span>${msg!}</span>
+			<div class="input_info">
+				<textarea class="text" name="content" id="content"></textarea>
+			</div>
+			<div class="input_btn_box">
+				<input type="button" class="btn input_btn" value="发表评论" id="cmtBtn"/>
+			</div>
+		</form>
+		</div>
+	</div>
+	<div class="com_bottom"></div>
+</div>
+<script>
+//提交评论
+$('#cmtBtn').click(function(){
+	var content = $('#content').val();
+	if (!content) {
+		alert('请填写内容后提交！')
+	}
+	$(this).attr('disabled', 'disabled');
+	$.post('/comment/comment', $('#cmtForm').serialize(), function(text) {
+		$('#commentDiv').html(text);
+	})
+})
+//回复
+$('.reply').click(function(e){
+	e.preventDefault();
+	var cmtId = $(this).attr('rel');
+	$('#content').val('回复 匿名用户:' + $('#content').val());
+})
+</script>

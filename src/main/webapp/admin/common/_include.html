@@ -1,0 +1,72 @@
+<!-- ueditor控件 -->
+<script type="text/javascript" src="/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/static/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+<!-- Jquery file upload控件 -->
+<link rel="stylesheet" type="text/css" href="/static/jQuery-File-Upload/jquery.fileupload.css"/>
+<link rel="stylesheet" type="text/css" href="/static/jQuery-File-Upload/jquery.fileupload-ui.css"/>
+<script type="text/javascript" src="/static/jQuery-File-Upload/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/static/jQuery-File-Upload/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="/static/jQuery-File-Upload/jquery.fileupload.js"></script>
+
+<script>
+//表单验证
+$("#validForm").validation(null, {
+	validRules:[
+		{
+			name: 'required', 
+			validate: function(value) {
+				return ($.trim(value) == '');
+			}, 
+			defaultMsg:'必填信息'
+		},
+		{
+			name: 'imgRequire', 
+			validate: function(value) {
+				if ($('#thumbImg').length == 0) {
+					return ($.trim(value) == '');
+				}
+				return false;
+			}, 
+			defaultMsg:'请选择图片上传。'
+		},
+		{
+			name: 'pdfRequire', 
+			validate: function(value) {
+				if ($('#paperPdf').length == 0) {
+					return ($.trim(value) == '');
+				}
+				return false;
+			}, 
+			defaultMsg:'请选择PDF文件上传。'
+		},
+		{
+			name: 'pptRequire', 
+			validate: function(value) {
+				if ($('#guidePpt').length == 0) {
+					return ($.trim(value) == '');
+				}
+				return false;
+			}, 
+			defaultMsg:'请选择PPT文件上传。'
+		},
+		{
+			name: 'editorRequired', 
+			validate: function(){
+				return $.trim(ue.getContent()) == '';
+			},
+			defaultMsg:'全文不能为空。'
+		}
+	]
+});
+
+//提交
+$('#saveBtn').click(function(e){
+	if (typeof ue != 'undefined') {
+		$('#content').val(ue.getContent());
+	}
+	if($('#validForm').valid()) {
+		$('#validForm').submit();
+	}
+})
+</script>

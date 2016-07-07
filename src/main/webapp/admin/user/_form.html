@@ -1,0 +1,36 @@
+<input type="hidden" name="user.id" value="${user.id!}" />
+
+<div class="form-group">
+    <label class="col-md-1 control-label">用户名</label>
+    <div class="col-md-5">
+    	<input type="text" name="user.name" value="${user.name!}" class="form-control" check-type="required"/>
+    </div>
+</div>
+<div class="form-group">
+	<label class="col-md-1 control-label">是否有效</label>
+	<div class="col-md-5">
+		<select name="user.available" id="userAvailable">
+			<option value="1">有效</option>
+			<option value="-1">无效</option>
+		</select>
+	</div>
+</div>
+
+<div class="form-group">
+	<div class="col-md-offset-4 col-md-4">
+		<a href="/admin/user"><button type="button" class="btn btn-primary" id="cancerBtn">取消</button></a>
+		<button type="button" class="btn btn-primary" id="saveBtn">保存</button>
+	</div>
+</div>
+
+<!-- 通用JS -->
+@ include('/admin/common/_include.html') {}
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var selectedVal = '${user.available!}';
+		if (selectedVal) {
+			$('#userAvailable').val(selectedVal);
+		}
+	})
+</script>

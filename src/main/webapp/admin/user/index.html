@@ -1,0 +1,118 @@
+@ layout("/admin/common/_layout.html", {title:'角色管理', module:'user'}) {
+
+<div>
+	<div class="row">
+		<div class="col-md-2"><h4>角色信息</h4></div>
+		<div class="col-md-1 col-md-offset-8">
+			<a href="/admin/user/add"><button type="button" class="btn btn-primary" id="addBtn"><span class="glyphicon glyphicon-plus"></span>添加</button></a>
+		</div>
+	</div>
+	<table class="table table-hover table-bordered">
+		<tr>
+			<th class="col-md-2">用户名</th>
+			<th class="col-md-4">已分配角色</th>
+			<th class="col-md-2">是否有效</th>
+			<th class="col-md-2"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>操作</th>
+			<th class="col-md-1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>角色</th>
+		</tr>
+		@ for (user in page.list) {
+		<tr>
+			<td>${user.name}</td>
+			<td>${isEmpty(user.role) ? '' : user.role}</td>
+			<td>${user.available == 1 ? "是" : "否"}</td>
+			<td>
+				<button type="button" class="btn btn-danger delBtn" data-param='${user.id}'><span class="glyphicon glyphicon-remove"></span>删除</button>
+				<button type="button" class="btn btn-primary editBtn" data-param='${user.id}'><span class="glyphicon glyphicon-edit"></span>编辑</button>
+			</td>
+			<td>
+				<button type="button" class="btn btn-info roleBtn" data-param='${user.id}'>分配角色</button>
+			</td>
+		</tr>
+		@ } elsefor {
+		<tr><td colspan="4">暂无内容可显示。</td></tr>
+		@ }
+	</table>
+</div>
+
+@ include("/admin/common/_paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!}) {}
+
+<div class="modal fade" id="rolesModalDiv" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>角色分配</h3>
+			</div>
+			<div class="modal-body">
+				<p id="roles-modal-body">
+				<form class="form-horizontal" id="rolesForm">
+				<input type="hidden" name="userId" id="userId"/>
+				<div class="form-group">
+					<div class="col-sm-12" id="checkbox-div"></div>
+				</div>
+				</form>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button id="cancelRolesModalBtn" type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+				<button id="confirmRolesBtn" type="button" class="btn btn-primary">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	//编辑
+	$('.editBtn').click(function(){
+		var param = $(this).attr('data-param');
+		location.href = '/admin/user/edit/' + param;
+	})
+	//删除
+	$('.delBtn').click(function() {
+		var param = $(this).attr('data-param');
+		$.dialog({
+			callback: function() {
+				location.href = '/admin/user/delete/' + param;
+			},
+			header: '',
+			body: '确认要删除吗？'
+		})
+	})
+
+	//权限
+	$('.roleBtn').click(function() {
+		var userId = $(this).attr('data-param');
+		$.get('/admin/role/list', {userId: userId}, function(res) {
+			$('#rolesModalDiv').modal('show');
+			$('#userId').val(userId);
+			var checkboxHtml = [];
+			for (var i = 0; i < res.length; i++) {
+				checkboxHtml.push('<div class="checkbox col-md-3">')
+				checkboxHtml.push('	<label>')
+				checkboxHtml.push('	<input name="roles" type="checkbox" value="' + res[i].id + '"')
+				if (res[i].checked) {
+					checkboxHtml.push(' checked=checked ')
+				}
+				checkboxHtml.push('	/>' + res[i].role)
+				checkboxHtml.push('</div>')
+			}
+			$('#checkbox-div').html(checkboxHtml.join(''));
+		}, 'json')
+	})
+
+	$('#rolesModalDiv').on('hidden.bs.modal', function() {
+		$('#rolesForm')[0].reset();
+	})
+
+	$('#confirmRolesBtn').click(function() {
+		$.post('/admin/role/updateRolesOfUser', $('#rolesForm').serialize(), function(res) {
+			if (res.success) {
+				location.reload();
+			} else {
+				alert('操作失败！')
+			}
+		}, 'json')
+	})
+
+</script>
+@ }

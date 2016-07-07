@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>user list</title>
+</head>
+<body>
+@ for (u in users!) {
+	<div>${u.name}</div>
+@ } elsefor {
+	暂无信息可显示。
+@ }
+</body>
+</html>

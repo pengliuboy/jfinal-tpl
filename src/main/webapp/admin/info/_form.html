@@ -1,0 +1,100 @@
+<input type="hidden" name="info.id" value="${info.id!}" />
+
+<div class="form-group">
+    <label class="col-md-1 control-label">标题</label>
+    <div class="col-md-5">
+    	<input type="text" name="info.title" value="${info.title!}" class="form-control" check-type="required"/>
+    </div>
+</div>
+<div class="form-group">
+	<label class="col-md-1 control-label">摘要</label>
+	<div class="col-md-8">
+	<textarea name="info.digest" rows="10" class="form-control">${info.digest!}</textarea>
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-md-1 control-label">作者</label>
+	<div class="col-md-5">
+	<input type="text" name="info.author" value="${info.author!}" class="form-control" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-md-1 control-label">出处</label>
+	<div class="col-md-5">
+	<input type="text" name="info.origin" value="${info.origin!}" class="form-control" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-md-1 control-label">缩略图</label>
+	<div class="col-md-11">
+		<input type="hidden" name="info.thumbnailAttaId" value="${info.thumbnailAttaId!}" id="thumbnailAttaId" check-type="imgRequire"/>
+		<div class="col-md-1">
+			@ if (!isEmpty(info.thumbnailAttaId)) {
+			<div class="row" style="margin-bottom:5px;">
+				<button type="button" class="btn btn-primary" id="showThumbnailPic">查看</button>
+			</div>
+			@ }
+			<div class="row">
+				<span class="btn btn-success fileinput-button">
+				    <i class="glyphicon glyphicon-plus"></i>
+				    <span>上传...</span>
+				    <input id="fileupload" type="file" data-url="/atta/upload/info-thumbnail" multiple>
+				</span>
+			</div>
+		</div>
+		<div>
+			<img src="" id="thumbnailPic" width="130" height="170" style="display:none;"/>
+		</div>
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-md-1 control-label">全文</label>
+	<div class="col-md-10">
+		<input type="hidden" id="content" name="info.content" value='${info.content!}' check-type="editorRequired"/>
+		<script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+	</div>
+</div>
+<div class="form-group">
+	<div class="col-md-offset-4 col-md-4">
+		<a href="/admin/info"><button type="button" class="btn btn-primary" id="cancerBtn">取消</button></a>
+		<button type="button" class="btn btn-primary" id="saveBtn">保存</button>
+	</div>
+</div>
+
+<!-- 通用JS -->
+@ include('/admin/common/_include.html') {}
+
+<script type="text/javascript">
+	//缩略图文件上传
+	$('#fileupload').fileupload({
+		acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+		dataType: 'json',
+		add: function(e, data) {
+			var acceptFileTypes = /(\.|\/)(gif|jpe?g|png)$/i;
+			if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+				alert('请上传图片格式的文件！')
+			} else {
+				data.submit();
+			}
+		},
+		done: function (e, data) {
+			$('#thumbnailAttaId').val(data.result.id);
+			$('#thumbnailPic').attr('src', data.result.url).show();
+		}
+	});
+	//查看图片
+	$('#showThumbnailPic').click(function(){
+		var src = $('#thumbnailPic').attr('src');
+		if (!src) {
+			$.get('/atta/show/${info.thumbnailAttaId!}', function(res) {
+				$('#thumbnailPic').attr('src', res[0].url).show();
+			}, 'json')
+		}
+	})
+	
+	//UEditor
+	var ue = UE.getEditor('editor');
+	ue.ready(function(){
+		ue.setContent($('#content').val(), false);
+	})
+</script>

@@ -1,0 +1,21 @@
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/admin">XXXX项目后台管理</a>
+		</div>
+		<div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="info"><a href="/admin/info">资讯</a></li>
+            <li id="user"><a href="/admin/user">用户</a></li>
+            <li id="role"><a href="/admin/role">角色</a></li>
+            <li id="permission"><a href="/admin/permission">权限</a></li>
+            @ if (session[@com.lp.common.AppConst.ADMIN_USER_SESSION_NAME] != null) {
+            <li><a class="navbar-brand" href="/admin/logout">退出</a></li>
+            @ }
+          </ul>
+        </div>
+	</div>
+</div>
+<script>
+$('#${module}').addClass('active');
+</script>

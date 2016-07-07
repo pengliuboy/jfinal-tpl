@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="jfinal-tpl" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="jfinal-tpl" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web Gradle : jfinal-tpl-1.0-SNAPSHOT.war">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/build/classes/main" />
+    <output-test url="file://$MODULE_DIR$/build/classes/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.11" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.jfinal:jfinal:2.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.jfinal:cos:26Dec2008" level="project" />
+    <orderEntry type="library" name="Gradle: com.ibeetl:beetl:2.4.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.alibaba:druid:1.0.21" level="project" />
+    <orderEntry type="library" name="Gradle: com.alibaba:fastjson:1.2.13" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.xmlbeans:xmlbeans:2.6.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.poi:poi:3.15-beta1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.poi:poi-ooxml:3.15-beta1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.poi:poi-ooxml-schemas:3.15-beta1" level="project" />
+    <orderEntry type="library" name="Gradle: it.sauronsoftware.cron4j:cron4j:2.2.5" level="project" />
+    <orderEntry type="library" name="Gradle: net.sf.ehcache:ehcache-core:2.6.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.lucene:lucene-core:4.10.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.lucene:lucene-queries:4.10.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.lucene:lucene-queryparser:4.10.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.jsoup:jsoup:1.9.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.guava:guava:19.0" level="project" />
+    <orderEntry type="library" name="Gradle: cglib:cglib-nodep:3.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.antlr:antlr4-runtime:4.2" level="project" />
+    <orderEntry type="library" name="Gradle: stax:stax-api:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.10" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.virtuald:curvesapi:1.03" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.lucene:lucene-sandbox:4.10.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.abego.treelayout:org.abego.treelayout.core:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.antlr:antlr4-annotations:4.2" level="project" />
+    <orderEntry type="module-library">
+      <library name="Gradle: IKAnalyzer2012FF_u1">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/IKAnalyzer2012FF_u1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: net.sf.jxls:jxls-core:1.0.6" level="project" />
+    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.1.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-collections:commons-collections:3.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-digester:commons-digester:2.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-jexl:2.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-log4j12:1.7.21" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.21" level="project" />
+    <orderEntry type="module-library">
+      <library name="Gradle: commons-codec-1.9">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/commons-codec-1.9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: commons-fileupload-1.3.1">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/commons-fileupload-1.3.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: commons-io-2.4">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/commons-io-2.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: json">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/json.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: ueditor-1.1.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/ueditor-1.1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.39" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.jfinal:jetty-server:8.1.8" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.eclipse.jetty:jetty-xml:8.1.8.v20121106" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.eclipse.jetty:jetty-servlet:8.1.8.v20121106" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.eclipse.jetty:jetty-util:8.1.8.v20121106" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.eclipse.jetty:jetty-security:8.1.8.v20121106" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.eclipse.jetty:jetty-server:8.1.8.v20121106" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.eclipse.jetty:jetty-continuation:8.1.8.v20121106" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.eclipse.jetty:jetty-http:8.1.8.v20121106" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.eclipse.jetty:jetty-io:8.1.8.v20121106" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.shiro:shiro-core:1.2.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.shiro:shiro-web:1.2.4" level="project" />
+    <orderEntry type="library" name="Gradle: commons-beanutils:commons-beanutils:1.8.3" level="project" />
+  </component>
+</module>

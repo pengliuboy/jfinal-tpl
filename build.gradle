@@ -1,0 +1,65 @@
+group 'jfinal-tpl'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+idea {
+    module {
+        downloadJavadoc = false
+        downloadSources = false
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    // 导入本地的依赖包
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    // UEditor：commons-codec-1.9.jar commons-fileupload-1.3.1.jar commons-io-2.4.jar json.jar ueditor-1.1.2.jar
+    // Lucene中文分词：IKAnalyzer2012FF_u1.jar
+
+    // 必需
+    compile ('com.jfinal:jfinal:2.2')
+    compile ('com.jfinal:cos:26Dec2008')
+    compile ('com.ibeetl:beetl:2.4.5')
+    compile ('com.alibaba:druid:1.0.21')
+    compile ('com.alibaba:fastjson:1.2.13')
+    compile ('org.slf4j:slf4j-log4j12:1.7.21')
+    compile ('org.slf4j:slf4j-api:1.7.21')
+    compile ('log4j:log4j:1.2.17')
+    compile ('org.apache.xmlbeans:xmlbeans:2.6.0')
+    compile ('mysql:mysql-connector-java:5.1.39')
+    providedCompile ('com.jfinal:jetty-server:8.1.8')   // 编译时需要，部署到tomcat中删除此包
+
+    // 定时任务cron
+    compile ('it.sauronsoftware.cron4j:cron4j:2.2.5')
+    // Ehcache缓存插件
+    compile ('net.sf.ehcache:ehcache-core:2.6.11')
+    // Poi Excel报表导出
+    compile ('org.apache.poi:poi:3.15-beta1')
+    compile ('org.apache.poi:poi-ooxml:3.15-beta1')
+    compile ('org.apache.poi:poi-ooxml-schemas:3.15-beta1')
+    compile ('net.sf.jxls:jxls-core:1.0.6')
+    compile ('com.google.guava:guava:19.0')
+    // Lucene
+    compile ('org.apache.lucene:lucene-core:4.10.4')
+    compile ('org.apache.lucene:lucene-queries:4.10.4')
+    compile ('org.apache.lucene:lucene-queryparser:4.10.4')
+    compile ('org.jsoup:jsoup:1.9.2')
+    // Shiro
+    compile ('org.apache.shiro:shiro-core:1.2.4')
+    compile ('org.apache.shiro:shiro-web:1.2.4')
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

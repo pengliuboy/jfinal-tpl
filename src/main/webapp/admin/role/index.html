@@ -1,0 +1,121 @@
+@ layout("/admin/common/_layout.html", {title:'角色管理', module:'role'}) {
+
+<div>
+	<div class="row">
+		<div class="col-md-2"><h4>角色信息</h4></div>
+		<div class="col-md-1 col-md-offset-9">
+			<a href="/admin/role/add"><button type="button" class="btn btn-primary" id="addBtn"><span class="glyphicon glyphicon-plus"></span>添加</button></a>
+		</div>
+	</div>
+	<table class="table table-hover table-bordered">
+		<tr>
+			<th class="col-md-2">角色</th>
+			<th class="col-md-2">描述</th>
+			<th class="col-md-4">已分配权限</th>
+			<th class="col-md-1">是否有效</th>
+			<th class="col-md-2"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>操作</th>
+			<th class="col-md-1"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>权限</th>
+		</tr>
+		@ for (role in page.list) {
+		<tr>
+			<td>${role.role}</td>
+			<td>${role.description}</td>
+			<td>${role.permission}</td>
+			<td>${role.available == 1 ? "是" : "否"}</td>
+			<td>
+				<button type="button" class="btn btn-primary editBtn" data-param='${role.id}'><span class="glyphicon glyphicon-edit"></span>编辑</button>
+				<button type="button" class="btn btn-danger delBtn" data-param='${role.id}'><span class="glyphicon glyphicon-remove"></span>删除</button>
+			</td>
+			<td>
+				<button type="button" class="btn btn-primary permBtn" data-param='${role.id}'><span class="glyphicon glyphicon-lock"></span>分配权限</button>
+			</td>
+		</tr>
+		@ } elsefor {
+		<tr><td colspan="12">暂无内容可显示。</td></tr>
+		@ }
+	</table>
+</div>
+
+@ include("/admin/common/_paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!}) {}
+
+<!-- 权限模态框 -->
+<div class="modal fade" id="permsModalDiv" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>权限分配</h3>
+			</div>
+			<div class="modal-body">
+				<p id="roles-modal-body">
+				<form class="form-horizontal" id="permsForm">
+					<input type="hidden" name="roleId" id="roleId"/>
+					<div class="form-group">
+						<div class="col-sm-12" id="checkbox-div"></div>
+					</div>
+				</form>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button id="cancelPermsModalBtn" type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+				<button id="confirmPermsBtn" type="button" class="btn btn-primary">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	//编辑
+	$('.editBtn').click(function(){
+		var param = $(this).attr('data-param');
+		location.href = '/admin/role/edit/' + param;
+	})
+	//删除
+	$('.delBtn').click(function() {
+		var param = $(this).attr('data-param');
+		$.dialog({
+			callback: function() {
+				location.href = '/admin/role/delete/' + param;
+			},
+			header: '',
+			body: '确认要删除吗？'
+		})
+	})
+
+	// 权限操作
+	$('.permBtn').click(function() {
+		var roleId = $(this).attr('data-param');
+		$.get('/admin/permission/list', {roleId: roleId}, function(res) {
+			$('#permsModalDiv').modal('show');
+			$('#roleId').val(roleId);
+
+			var checkboxHtml = [];
+			for (var i = 0; i < res.length; i++) {
+				checkboxHtml.push('<div class="checkbox col-md-3">')
+				checkboxHtml.push('	<label>')
+				checkboxHtml.push('	<input name="perms" type="checkbox" value="' + res[i].id + '"')
+				if (res[i].checked) {
+					checkboxHtml.push(' checked=checked ')
+				}
+				checkboxHtml.push('	/>' + res[i].permission)
+				checkboxHtml.push('</div>')
+			}
+			$('#checkbox-div').html(checkboxHtml.join(''));
+		}, 'json')
+	})
+
+	$('#permsModalDiv').on('hidden.bs.modal', function() {
+		$('#permsForm')[0].reset();
+	})
+
+	$('#confirmPermsBtn').click(function() {
+		$.post('/admin/permission/updatePermsOfRole', $('#permsForm').serialize(), function(res) {
+			if (res.success) {
+				location.reload();
+			} else {
+				alert('操作失败！')
+			}
+		}, 'json')
+	})
+</script>
+@ }

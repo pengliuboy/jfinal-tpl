@@ -1,0 +1,32 @@
+@ layout("/en/common/_layout.html", {title:'Info', module:'info'}) {
+	<form action="/info/search" method="post">
+		<input type="hidden" name="pageNumber"/>
+		KewWord：<input name="keyword"/>
+		<button type="submit">Search</button>
+	</form>
+	@ for (info in page.list) {
+	<div>
+        <div>
+        	<label>Title：</label>${info.title}
+        </div>
+        <div>
+        	<label>Abstract：</label>${info.digest}
+        </div>
+        <div>
+        	<label>NailThumb：</label><img alt="" src="/upload/thumbnail/info/${info.thumbnailAttaId}${strutil.getSuffix(info.attaName)}">
+        </div>
+        <div>
+        	<label>CreateTime：</label>${info.createTime, "yyyy-MM-dd HH:mm:ss"}
+        </div>
+        <div>
+        	<label>UpdateTime：</label>${info.updateTime, "yyyy-MM-dd HH:mm:ss"}
+        </div>
+	</div>
+    @ } elsefor {
+    <div>
+    	No item to be displayed.
+    </div>	
+    @ }
+    <!-- 分页信息 -->
+    @ include("/common/_paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!}) {}
+@ }

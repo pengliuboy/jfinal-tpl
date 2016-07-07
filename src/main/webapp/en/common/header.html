@@ -1,0 +1,19 @@
+<div class="nav">
+	<div class="nav_body">
+	<form action="/" method="post" id="switchForm">
+		<input type="hidden" name="_locale" value="zh"/>
+		<ul>
+			<li><a id="home" href="/">Home</a></li>
+			<li><a id="info" href="/info">Info</a></li>
+			<li><a href="#" id="switchLang">中文</a></li>
+		</ul>
+	</form>
+	</div>
+</div>
+<script>
+	$('#${module}').addClass('hover');
+	$('#switchLang').click(function(e){
+		e.preventDefault();
+		$('#switchForm').submit();
+	})
+</script>

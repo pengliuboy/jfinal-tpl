@@ -1,0 +1,20 @@
+package com.lp.biz.user;
+
+import com.jfinal.core.Controller;
+import com.jfinal.validate.Validator;
+
+public class AdminLoginValidator extends Validator {
+
+	@Override
+	protected void validate(Controller c) {
+		validateRequiredString("name", "nameMsg", "请输入用户名");
+		validateRequiredString("password", "passwordMsg", "请输入密码");
+	}
+
+	@Override
+	protected void handleError(Controller c) {
+		c.keepPara("name");
+		c.render("/admin/login.html");
+	}
+
+}

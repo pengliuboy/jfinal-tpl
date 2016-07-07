@@ -1,0 +1,53 @@
+@ layout("/admin/common/_layout.html", {title:'权限管理', module:'permission'}) {
+
+<div>
+	<div class="row">
+		<div class="col-md-2"><h4>权限信息</h4></div>
+		<div class="col-md-1 col-md-offset-8">
+			<a href="/admin/permission/add"><button type="button" class="btn btn-primary" id="addBtn"><span class="glyphicon glyphicon-plus"></span>添加</button></a>
+		</div>
+	</div>
+	<table class="table table-hover table-bordered">
+		<tr>
+			<th class="col-md-2">权限</th>
+			<th class="col-md-4">描述</th>
+			<th class="col-md-2">是否有效</th>
+			<th class="col-md-3"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>操作</th>
+		</tr>
+		@ for (permission in page.list) {
+		<tr>
+			<td>${permission.permission}</td>
+			<td>${permission.description}</td>
+			<td>${permission.available == 1 ? "是" : "否"}</td>
+			<td>
+				<button type="button" class="btn btn-primary editBtn" data-param='${permission.id}'><span class="glyphicon glyphicon-edit"></span>编辑</button>
+				<button type="button" class="btn btn-danger delBtn" data-param='${permission.id}'><span class="glyphicon glyphicon-remove"></span>删除</button>
+			</td>
+		</tr>
+		@ } elsefor {
+		<tr><td colspan="4">暂无内容可显示。</td></tr>
+		@ }
+	</table>
+</div>
+
+@ include("/admin/common/_paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!}) {}
+
+<script>
+//编辑
+$('.editBtn').click(function(){
+	var param = $(this).attr('data-param');
+	location.href = '/admin/permission/edit/' + param;
+})
+//删除
+$('.delBtn').click(function() {
+	var param = $(this).attr('data-param');
+	$.dialog({
+		callback: function() {
+			location.href = '/admin/permission/delete/' + param;
+		},
+		header: '',
+		body: '确认要删除吗？'
+	})
+})
+</script>
+@ }

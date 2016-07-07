@@ -1,0 +1,32 @@
+@ layout("/common/_layout.html", {title:'资讯信息', module:'info'}) {
+	<form action="/info/search" method="post">
+		<input type="hidden" name="pageNumber"/>
+		关键字：<input name="keyword"/>
+		<button type="submit">检索</button>
+	</form>
+	@ for (info in page.list) {
+	<div>
+        <div>
+        	<label>标题：</label>${info.title}
+        </div>
+        <div>
+        	<label>摘要：</label>${info.digest}
+        </div>
+        <div>
+        	<label>缩略图：</label><img alt="" src="/upload/thumbnail/info/${info.thumbnailAttaId}${strutil.getSuffix(info.attaName)}">
+        </div>
+        <div>
+        	<label>创建时间：</label>${info.createTime, "yyyy-MM-dd HH:mm:ss"}
+        </div>
+        <div>
+        	<label>更新时间：</label>${info.updateTime, "yyyy-MM-dd HH:mm:ss"}
+        </div>
+	</div>
+    @ } elsefor {
+    <div>
+    	暂无信息可显示。
+    </div>	
+    @ }
+    <!-- 分页信息 -->
+    @ include("/common/_paginate.html",{"currentPage":page.pageNumber,"totalPage":page.totalPage,"actionUrl":actionUrl!}) {}
+@ }
